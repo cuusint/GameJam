@@ -5,25 +5,23 @@ using UnityEngine;
 public class rpy_Player : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpHeight = 5f;
-    private Rigidbody2D rb;
-    private bool onGround = false;
-    private void Start()
+    public Rigidbody2D rb;
+    public bool onGround = false;
+    public float jumpHeight = 500f;
+    public void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();  
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 3f;
     }
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         rb.velocity = new Vector3(moveHorizontal * speed, rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space)&&onGround)
         {
-            rb.AddForce(Vector2.up*500);
+            rb.AddForce(Vector2.up * jumpHeight);
             onGround = false;
         }
-        
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

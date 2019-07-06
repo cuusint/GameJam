@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -3.01, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -216,6 +216,8 @@ GameObject:
   - component: {fileID: 583060711}
   - component: {fileID: 583060710}
   - component: {fileID: 583060709}
+  - component: {fileID: 583060714}
+  - component: {fileID: 583060715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Ground
@@ -230,13 +232,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583060708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d73c7e406e6c8d409fb457618164226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpHeight: 20
+  rb: {fileID: 0}
+  onGround: 0
+  jumpHeight: 500
 --- !u!61 &583060710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +287,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &583060712
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -346,6 +350,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583060714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583060708}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcda1dd8ad8d9742b0ce752754f87e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!114 &583060715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583060708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb31589528734f4084724335365a4fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rb: {fileID: 0}
+  onGround: 0
+  jumpHeight: 500
 --- !u!1 &996869836
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +392,7 @@ GameObject:
   - component: {fileID: 996869838}
   - component: {fileID: 996869837}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,7 +519,7 @@ GameObject:
   - component: {fileID: 1962160752}
   - component: {fileID: 1962160750}
   m_Layer: 0
-  m_Name: New Sprite (1)
+  m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
