@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\rpy_Fly.cs" />
     <Compile Include="Assets\Scripts\rpy_Jump.cs" />
     <Compile Include="Assets\Scripts\rpy_Player.cs" />
+    <Compile Include="Assets\Scripts\TrackPlayer.cs" />
     <Compile Include="Assets\Sprites\NewBehaviourScript1.cs" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
