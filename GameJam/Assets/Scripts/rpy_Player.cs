@@ -5,13 +5,13 @@ using UnityEngine;
 public class rpy_Player : MonoBehaviour {
     public float speed = 5f;
     public Rigidbody2D rb;
-    private BoxCollider2D collider;
+    private CapsuleCollider2D collider;
     public bool onGround = false;
     public float jumpHeight = 500f;
     private bool CanMoveHorizontally = false;
     public void Start() {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
+        collider = GetComponent<CapsuleCollider2D>();
         rb.gravityScale = 3f;
     }
     public void FixedUpdate() {

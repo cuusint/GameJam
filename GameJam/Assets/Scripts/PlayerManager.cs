@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private Rigidbody2D rb;
-    private BoxCollider2D collider;
+    private CapsuleCollider2D collider;
     public class State {
         public bool IsSwing {
             get; set;
@@ -31,19 +31,53 @@ public class PlayerManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
+        collider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Update() {
-        if (state.IsSwing) {
-            HandleBreakJoint();
-        } else {
-            HandleGraspJoint();
+        //if (state.IsSwing) {
+        //    HandleBreakJoint();
+        //} else {
+        //    HandleGraspJoint();
+        //}
+
+    }
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.tag == "Joint") {
+            if (Input.GetKeyDown(KeyCode.G)) {
+                collision.transform.GetComponent<Joint>().BreakJoint();
+            }
+            if (Input.GetKeyDown(KeyCode.F)) {
+                collision.transform.GetComponent<Joint>().GetPlayer();
+            }
         }
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == "Joint") {
+            if (Input.GetKeyDown(KeyCode.G)) {
+                collision.transform.GetComponent<Joint>().BreakJoint();
+            }
+            if (Input.GetKeyDown(KeyCode.F)) {
+                collision.transform.GetComponent<Joint>().GetPlayer();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.tag == "Joint") {
+            if (Input.GetKeyDown(KeyCode.G)) {
+                collision.transform.GetComponent<Joint>().BreakJoint();
+            }
+            if (Input.GetKeyDown(KeyCode.F)) {
+                collision.transform.GetComponent<Joint>().GetPlayer();
+            }
+        }
+    }
     private void HandleBreakJoint() {
+
+
         collider.enabled = false;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 1.5f);
         collider.enabled = true;
