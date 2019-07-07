@@ -6,16 +6,73 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    public static PlayerManager Instance {
+        get;
+        private set;
+    }
+
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    public class State {
+        public bool IsSwing {
+            get; set;
+        }
 
+        public bool SwingToLimit {
+            get; set;
+        }
+
+        public bool OnGround {
+            get; set;
+        }
+    }
+
+    public State state = new State();
     private void Awake() {
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
     }
 
-    private void FixedUpdate() {
-        //collider.enabled = rb.velocity.y > 0 ? false : true;
+    private void Update() {
+        if (state.IsSwing) {
+            HandleBreakJoint();
+        } else {
+            HandleGraspJoint();
+        }
+
+    }
+
+    private void HandleBreakJoint() {
+        collider.enabled = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 1.5f);
+        collider.enabled = true;
+        if (hit) {
+            if (hit.transform.tag == "Joint") {
+                if (Input.GetKeyDown(KeyCode.Space)) {
+                    hit.transform.GetComponent<Joint>().BreakJoint();
+                }
+            }
+        }
+
+    }
+
+    private void HandleGraspJoint() {
+        bool isGOingRight = rb.velocity.x > 0 ? true : false;
+        Vector2 rayDirection = isGOingRight ? Vector2.right : Vector2.left;
+        Vector2 rayOrigin = transform.position;
+        float rayDistance = 0.5f;
+        collider.enabled = false;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance);
+        collider.enabled = true;
+        if (hit) {
+            if (hit.transform.tag == "Joint") {
+                if (Input.GetKeyDown(KeyCode.Space)) {
+                    hit.transform.GetComponent<Joint>().GetPlayer();
+                }
+            }
+        }
+
     }
 
 }

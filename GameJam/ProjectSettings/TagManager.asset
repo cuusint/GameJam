@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - NPC
+  - Joint
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 4129910069
+    locked: 0
+  - name: item
+    uniqueID: 3111879309
+    locked: 0
+  - name: npc
+    uniqueID: 377601753
+    locked: 0
+  - name: player
+    uniqueID: 2986430987
     locked: 0
